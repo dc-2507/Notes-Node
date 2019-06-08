@@ -19,11 +19,13 @@ var saveNotes = (notes) => {
 };
 
 var getAll = () => {
-    console.log('Getting all Notes.');
+    return fetchNotes();
 };
 
 var read = (title) => {
-    console.log('Getting note titled ',title);
+    var notes = fetchNotes();
+    var readNote = notes.filter((note) => note.title == title);
+    return readNote[0];
 }
 
 var remove = (title) => {
@@ -49,9 +51,17 @@ var addNote = (title, body) => {
     }
 };
 
+var logNote = (note) => {
+    console.log("----");
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+    console.log("----");
+}
+
 module.exports = {
     addNote : addNote,
     getAll : getAll,
     read : read,
-    remove : remove
+    remove : remove,
+    logNote : logNote
 };

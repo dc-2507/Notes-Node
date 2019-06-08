@@ -18,10 +18,7 @@ if(command === 'add')
     var t = typeof note;
     if(note){
     console.log("Note added");
-    console.log("--");
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
-    console.log("--");
+    notes.logNote(note);
     }
     else
     console.log("Duplicate insertion");
@@ -29,12 +26,21 @@ if(command === 'add')
 
 else if(command === 'list')
 {
-    notes.getAll();
+    var allNotes = notes.getAll();
+    console.log(`Printing ${allNotes.length} note(s).`);
+    allNotes.forEach((note) => notes.logNote(note));
 }
 
 else if(command === 'read')
 {
-    notes.read(argv.title);
+    var noteRead = notes.read(argv.title);
+    if(noteRead)
+    {
+        console.log("Note read");
+        notes.logNote(noteRead);
+    }
+    else
+    console.log("Note not found.");
 }
 
 else if(command === 'remove')
